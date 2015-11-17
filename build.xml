@@ -1,0 +1,46 @@
+<project name="nvt4j" default="build" basedir=".">
+
+        <property name="jar.file" value="nvt4j.jar"/>
+	<property name="src.dir" value="src"/>
+	<property name="build.dir" value="build"/>
+	<property name="api.dir" value="api"/>
+
+	<path id="classpath">
+		<pathelement location="${build.dir}"/>
+	</path>
+
+	<target name="init">
+		<tstamp/>
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${api.dir}"/>
+	</target>
+
+	<target name="build" depends="init">
+		<javac srcdir="${src.dir}" destdir="${build.dir}">
+			<classpath refid="classpath"/>
+			<compilerarg value="-Xlint:-unchecked"/>
+		</javac>
+	</target>
+
+        <target name="api" depends="init">
+                <javadoc sourcepath="${src.dir}" destdir="${api.dir}">
+                        <package name="nvt4j"/>
+                </javadoc>
+	</target>
+
+	<target name="release" depends="init">
+                <delete file="${jar.file}"/>
+		<delete dir="${api.dir}"/>
+                <antcall target="clean"/>
+                <antcall target="build"/>
+                <jar destfile="${jar.file}" basedir="${build.dir}"/>
+                <antcall target="api"/>
+                <antcall target="clean"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+</project>
+

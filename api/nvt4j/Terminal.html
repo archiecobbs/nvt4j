@@ -253,13 +253,13 @@
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../nvt4j/Terminal.html#put(int, int, java.lang.String)">put</a></strong>(int&nbsp;row,
    int&nbsp;column,
-   java.lang.String&nbsp;s)</code>
+   <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;s)</code>
 <div class="block">Moves the cursor and writes a string to the terminal.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="../nvt4j/Terminal.html#put(java.lang.String)">put</a></strong>(java.lang.String&nbsp;s)</code>
+<td class="colLast"><code><strong><a href="../nvt4j/Terminal.html#put(java.lang.String)">put</a></strong>(<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;s)</code>
 <div class="block">Writes a string to the terminal.</div>
 </td>
 </tr>
@@ -291,10 +291,10 @@
 <li class="blockList">
 <h4>setCursor</h4>
 <pre>void&nbsp;setCursor(boolean&nbsp;on)
-               throws java.io.IOException</pre>
+               throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Turns the terminal emulator's cursor on or off.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="clear()">
@@ -304,10 +304,10 @@
 <li class="blockList">
 <h4>clear</h4>
 <pre>void&nbsp;clear()
-           throws java.io.IOException</pre>
+           throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Clears the screen.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="getRows()">
@@ -339,12 +339,12 @@
 <li class="blockList">
 <h4>get</h4>
 <pre>int&nbsp;get()
-        throws java.io.IOException</pre>
+        throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Returns the next character sent by the terminal, or -1 if the stream
  is closed. The terminal is in 'raw' mode, not line-buffered mode.
  This method blocks until a character is available.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="get(byte[])">
@@ -354,13 +354,13 @@
 <li class="blockList">
 <h4>get</h4>
 <pre>int&nbsp;get(byte[]&nbsp;buf)
-        throws java.io.IOException</pre>
+        throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Reads some characters from the terminal and writes them to buffer 'buf'
  starting from position 0, and returns the number of characters read,
  or -1 if the stream is closed. This method blocks until a character is
  available. The terminal is in 'raw' mode, not line-buffered mode.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="get(byte[], int, int)">
@@ -372,13 +372,13 @@
 <pre>int&nbsp;get(byte[]&nbsp;buf,
       int&nbsp;off,
       int&nbsp;len)
-        throws java.io.IOException</pre>
+        throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Reads up to 'len' characters from the terminal and writes them to buffer 'buf'
  starting from position 'off', and returns the number of characters read,
  or -1 if the stream is closed. This method blocks until a character is available.
  The terminal is in 'raw' mode, not line-buffered mode.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(byte[], int, int)">
@@ -390,10 +390,10 @@
 <pre>void&nbsp;put(byte[]&nbsp;buf,
        int&nbsp;off,
        int&nbsp;len)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Writes 'len' characters to the terminal, starting from position 'off'.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(byte[])">
@@ -403,10 +403,10 @@
 <li class="blockList">
 <h4>put</h4>
 <pre>void&nbsp;put(byte[]&nbsp;buf)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Writes buffer 'buf' to the terminal.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(java.lang.String)">
@@ -415,14 +415,14 @@
 <ul class="blockList">
 <li class="blockList">
 <h4>put</h4>
-<pre>void&nbsp;put(java.lang.String&nbsp;s)
-         throws java.io.IOException</pre>
+<pre>void&nbsp;put(<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;s)
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Writes a string to the terminal. The characters are extracted
  from the string using the method String.getBytes(), which translates
  each (2-byte) unicode character to a byte.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the end of string would be outside the window</dd>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if the end of string would be outside the window</dd>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(int)">
@@ -432,11 +432,11 @@
 <li class="blockList">
 <h4>put</h4>
 <pre>void&nbsp;put(int&nbsp;c)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Writes one character to the terminal. The int is converted into a byte
  by casting.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(char)">
@@ -446,11 +446,11 @@
 <li class="blockList">
 <h4>put</h4>
 <pre>void&nbsp;put(char&nbsp;c)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Writes one character to the terminal. The char is converted into a byte
  by casting.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(byte)">
@@ -460,10 +460,10 @@
 <li class="blockList">
 <h4>put</h4>
 <pre>void&nbsp;put(byte&nbsp;c)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Writes one character to the terminal.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(int, int, byte[], int, int)">
@@ -477,12 +477,12 @@
        byte[]&nbsp;buf,
        int&nbsp;off,
        int&nbsp;len)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Moves the cursor and writes 'len' characters to the terminal,
  starting from position 'off'.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the coordinates are out of range</dd>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if the coordinates are out of range</dd>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(int, int, byte[])">
@@ -494,11 +494,11 @@
 <pre>void&nbsp;put(int&nbsp;row,
        int&nbsp;column,
        byte[]&nbsp;buf)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Moves the cursor and writes buffer 'buf' to the terminal.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the coordinates are out of range</dd>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if the coordinates are out of range</dd>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(int, int, java.lang.String)">
@@ -509,15 +509,15 @@
 <h4>put</h4>
 <pre>void&nbsp;put(int&nbsp;row,
        int&nbsp;column,
-       java.lang.String&nbsp;s)
-         throws java.io.IOException</pre>
+       <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;s)
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Moves the cursor and writes a string to the terminal. The characters are extracted
  from the string using the method String.getBytes(), which translates
  each (2-byte) unicode character to a byte.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the coordinates are out of range</dd>
-<dd><code>java.lang.IllegalArgumentException</code> - if the end of string would be outside the window</dd>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if the coordinates are out of range</dd>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if the end of string would be outside the window</dd>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(int, int, int)">
@@ -529,12 +529,12 @@
 <pre>void&nbsp;put(int&nbsp;row,
        int&nbsp;column,
        int&nbsp;c)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Moves the cursor and writes one character to the terminal.
  The int is converted into a byte by casting.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the coordinates are out of range</dd>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if the coordinates are out of range</dd>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(int, int, char)">
@@ -546,12 +546,12 @@
 <pre>void&nbsp;put(int&nbsp;row,
        int&nbsp;column,
        char&nbsp;c)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Moves the cursor and writes one character to the terminal.
  The char is converted into a byte by casting.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the coordinates are out of range</dd>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if the coordinates are out of range</dd>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="put(int, int, byte)">
@@ -563,11 +563,11 @@
 <pre>void&nbsp;put(int&nbsp;row,
        int&nbsp;column,
        byte&nbsp;c)
-         throws java.io.IOException</pre>
+         throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Moves the cursor and writes one character to the terminal.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the coordinates are out of range</dd>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if the coordinates are out of range</dd>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="flush()">
@@ -577,10 +577,10 @@
 <li class="blockList">
 <h4>flush</h4>
 <pre>void&nbsp;flush()
-           throws java.io.IOException</pre>
+           throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Sends all characters in the buffer (if any) to the terminal.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="move(int, int)">
@@ -591,14 +591,14 @@
 <h4>move</h4>
 <pre>void&nbsp;move(int&nbsp;row,
         int&nbsp;column)
-          throws java.io.IOException</pre>
+          throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Sends the terminal emulator a command to move the cursor
  to the given row and column. The row must be between 1 and
  the value of getRows(), while the column must be between 1
  and the value of getColumn().</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the coordinates are out of range</dd>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code> - if the coordinates are out of range</dd>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="close()">
@@ -608,10 +608,10 @@
 <li class="blockList">
 <h4>close</h4>
 <pre>void&nbsp;close()
-           throws java.io.IOException</pre>
+           throws <a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Closes the terminal.</div>
 <dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd></dl>
+<dd><code><a href="https://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 </li>

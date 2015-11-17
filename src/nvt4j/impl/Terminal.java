@@ -16,6 +16,7 @@
 
 package nvt4j.impl;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -124,7 +125,8 @@ public class Terminal implements nvt4j.Terminal {
                 if (exception != null) {
                     throw exception;
                 }
-                in.read();
+                if (in.read() == -1)
+                    throw new EOFException();
             } catch (TelnetCommandException e) {
                 handleCommandException(e);
             }

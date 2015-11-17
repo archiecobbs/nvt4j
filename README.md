@@ -1,23 +1,15 @@
 
-Copyright 2006 Guglielmo Lichtner (lichtner_at_bway_dot_net)
-
-Current Status
---------------
-
-This project was imported from [Google Code](https://code.google.com/p/nvt4j/) to Github on Tue Nov 17 2015.
-
-[Javadoc API](http://archiecobbs.github.io/nvt4j/api/index.html)
-
-License
--------
-
-See the file called LICENSE in this directory.
-
 About
 -----
 
 The Network Virtual Terminal for Java (NVT4J) is a library which can drive
 a terminal emulator connected to the application through a telnet session.
+
+Current Status
+--------------
+
+This project was imported as an abandonded orphan from [Google Code](https://code.google.com/p/nvt4j/)
+and given a new home here on Github on 17-Nov-2015.
 
 Usage
 -----
@@ -48,4 +40,22 @@ all user inputs asap, instead of waiting for a new-line character.
 Unfortunately in pure Java there is no way to put the operating system console in
 raw mode. On Linux and similar systems this is done using the stty command, which is
 a native program which manipulates the terminal driver in the operating system.
+
+Downloads
+---------
+
+See [Downloads](https://github.com/archiecobbs/nvt4j/wiki/Downloads).
+
+Documentation
+-------------
+
+View the [Javadoc API](http://archiecobbs.github.io/nvt4j/api/index.html).
+
+License
+-------
+
+See the [LICENSE](https://github.com/archiecobbs/nvt4j/blob/master/LICENSE) file.
+
+Copyright 2006 Guglielmo Lichtner
+Copyright 2015 Archie L. Cobbs
 

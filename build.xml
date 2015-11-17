@@ -1,6 +1,14 @@
 <project name="nvt4j" default="build" basedir=".">
 
-        <property name="jar.file" value="nvt4j.jar"/>
+        <!-- Determine version -->
+        <exec outputproperty="library.version" executable="git" logError="true" failonerror="true">
+            <arg value="describe"/>
+        </exec>
+        <echo message=""/>
+        <echo message="Release version is ${library.version}"/>
+        <echo message=""/>
+
+        <property name="jar.file" value="nvt4j-${library.version}.jar"/>
         <property name="src.dir" value="src"/>
         <property name="build.dir" value="build"/>
         <property name="api.dir" value="api"/>
@@ -33,7 +41,8 @@
 
         <target name="api" depends="init">
                 <javadoc sourcepath="${src.dir}" destdir="${api.dir}" use="true"
-                  source="${java.source.version}" breakiterator="yes" windowtitle="NVT4J" doctitle="NVT4J" failonerror="true">
+                  source="${java.source.version}" breakiterator="yes" failonerror="true"
+                  windowtitle="NVT4J Release ${library.version}" doctitle="NVT4J Release ${library.version}">
                     <package name="nvt4j"/>
                     <arg value="-notimestamp"/>
                 </javadoc>

@@ -45,6 +45,7 @@
         </target>
 
         <target name="javadoc" depends="javac">
+                <delete dir="api"/>
                 <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}" use="true"
                   source="${java.source.version}" breakiterator="yes" failonerror="true"
                   windowtitle="NVT4J Release ${library.version}" doctitle="NVT4J Release ${library.version}">
@@ -54,6 +55,8 @@
                         <exclude name="Example.java"/>
                     </packageset>
                     <arg value="-notimestamp"/>
+                    <link href="https://docs.oracle.com/javase/7/docs/api/"/>
+                    <link href="https://docs.oracle.com/javaee/7/api/"/>
                 </javadoc>
                 <zip destfile="${javadoc.file}" basedir="${javadoc.dir}"/>
         </target>

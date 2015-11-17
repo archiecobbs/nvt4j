@@ -1,5 +1,5 @@
 
-Version 1.1 Released November 17, 2015
+Version 1.1.0 Released November 17, 2015
 
     - Fixed infinite loop if EOF is encountered at startup (issue #1)
 

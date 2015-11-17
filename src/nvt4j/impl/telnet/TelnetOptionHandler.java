@@ -19,7 +19,7 @@ package nvt4j.impl.telnet;
 import java.io.IOException;
 
 public interface TelnetOptionHandler {
-    
+
     public TelnetOption getOption();
     public boolean isReady();
     public void start(TelnetOutputStream telnetOutputStream) throws IOException;

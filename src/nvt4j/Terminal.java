@@ -83,7 +83,7 @@ public interface Terminal {
      * Writes a string to the terminal. The characters are extracted
      * from the string using the method String.getBytes(), which translates
      * each (2-byte) unicode character to a byte.
-     * 
+     *
      * @throws IllegalArgumentException if the end of string would be outside the window
      */
     public void put(String s) throws IOException;
@@ -108,14 +108,14 @@ public interface Terminal {
     /**
      * Moves the cursor and writes 'len' characters to the terminal,
      * starting from position 'off'.
-     * 
+     *
      * @throws IllegalArgumentException if the coordinates are out of range
      */
     public void put(int row, int column, byte[] buf, int off, int len) throws IOException;
 
     /**
      * Moves the cursor and writes buffer 'buf' to the terminal.
-     * 
+     *
      * @throws IllegalArgumentException if the coordinates are out of range
      */
     public void put(int row, int column, byte[] buf) throws IOException;
@@ -124,7 +124,7 @@ public interface Terminal {
      * Moves the cursor and writes a string to the terminal. The characters are extracted
      * from the string using the method String.getBytes(), which translates
      * each (2-byte) unicode character to a byte.
-     * 
+     *
      * @throws IllegalArgumentException if the coordinates are out of range
      * @throws IllegalArgumentException if the end of string would be outside the window
      */
@@ -133,7 +133,7 @@ public interface Terminal {
     /**
      * Moves the cursor and writes one character to the terminal.
      * The int is converted into a byte by casting.
-     * 
+     *
      * @throws IllegalArgumentException if the coordinates are out of range
      */
     public void put(int row, int column, int c) throws IOException;
@@ -141,14 +141,14 @@ public interface Terminal {
     /**
      * Moves the cursor and writes one character to the terminal.
      * The char is converted into a byte by casting.
-     * 
+     *
      * @throws IllegalArgumentException if the coordinates are out of range
      */
     public void put(int row, int column, char c) throws IOException;
 
     /**
      * Moves the cursor and writes one character to the terminal.
-     * 
+     *
      * @throws IllegalArgumentException if the coordinates are out of range
      */
     public void put(int row, int column, byte c) throws IOException;
@@ -163,7 +163,7 @@ public interface Terminal {
      * to the given row and column. The row must be between 1 and
      * the value of getRows(), while the column must be between 1
      * and the value of getColumn().
-     * 
+     *
      * @throws IllegalArgumentException if the coordinates are out of range
      */
     public void move(int row, int column) throws IOException;

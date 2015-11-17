@@ -40,69 +40,69 @@ public abstract class TelnetCommand {
     public int getPosition() { return position; }
 
     protected TelnetCommand(int position) {
-	this.position = position;
+        this.position = position;
     }
 
     public static String toString(byte c) {
-	return toString(0xFF & c);
+        return toString(0xFF & c);
     }
 
     public static String toString(int c) {
-	String s;
-	switch (c) {
-	case SE:
-	    s = "SE";
-	    break;
-	case NOP:
-	    s = "NOP";
-	    break;
-	case DM:
-	    s = "DM";
-	    break;
-	case BRK:
-	    s = "BRK";
-	    break;
-	case IP:
-	    s = "IP";
-	    break;
-	case AO:
-	    s = "AO";
-	    break;
-	case AYT:
-	    s = "AYT";
-	    break;
-	case EC:
-	    s = "EC";
-	    break;
-	case EL:
-	    s = "EL";
-	    break;
-	case GA:
-	    s = "GA";
-	    break;
-	case SB:
-	    s = "SB";
-	    break;
-	case WILL:
-	    s = "WILL";
-	    break;
-	case WONT:
-	    s = "WONT";
-	    break;
-	case DO:
-	    s = "DO";
-	    break;
-	case DONT:
-	    s = "DONT";
-	    break;
-	case IAC:
-	    s = "IAC";
-	    break;
-	default:
-	    s = String.valueOf(c);
-	    break;
-	}
-	return s;
+        String s;
+        switch (c) {
+        case SE:
+            s = "SE";
+            break;
+        case NOP:
+            s = "NOP";
+            break;
+        case DM:
+            s = "DM";
+            break;
+        case BRK:
+            s = "BRK";
+            break;
+        case IP:
+            s = "IP";
+            break;
+        case AO:
+            s = "AO";
+            break;
+        case AYT:
+            s = "AYT";
+            break;
+        case EC:
+            s = "EC";
+            break;
+        case EL:
+            s = "EL";
+            break;
+        case GA:
+            s = "GA";
+            break;
+        case SB:
+            s = "SB";
+            break;
+        case WILL:
+            s = "WILL";
+            break;
+        case WONT:
+            s = "WONT";
+            break;
+        case DO:
+            s = "DO";
+            break;
+        case DONT:
+            s = "DONT";
+            break;
+        case IAC:
+            s = "IAC";
+            break;
+        default:
+            s = String.valueOf(c);
+            break;
+        }
+        return s;
     }
 
 }

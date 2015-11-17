@@ -25,31 +25,31 @@ public class OptionSubnegotiationCommand extends OptionCommand {
     public byte[] getData() { return data; }
 
     public OptionSubnegotiationCommand(int position, TelnetOption option, byte[] data) {
-	super(position, option);
-	this.data = data;
+        super(position, option);
+        this.data = data;
     }
 
     public void execute(TelnetOptionHandler optionHandler) throws IOException {
-	optionHandler.onSubnegotiation(data, 0, data.length);
+        optionHandler.onSubnegotiation(data, 0, data.length);
     }
 
     public String toString() {
-	StringBuffer buf = new StringBuffer();
-	buf.append(toString(IAC));
-	buf.append(' ');
-	buf.append(toString(SB));
-	buf.append(' ');
-	buf.append(option);
-	for (int i = 0; i < data.length; i++) {
-	    buf.append(' ');
-	    buf.append(data[i]);
-	}
-	buf.append(' ');
-	buf.append(toString(IAC));
-	buf.append(' ');
-	buf.append(toString(SE));
-	buf.append(' ');
-	return buf.toString();
+        StringBuffer buf = new StringBuffer();
+        buf.append(toString(IAC));
+        buf.append(' ');
+        buf.append(toString(SB));
+        buf.append(' ');
+        buf.append(option);
+        for (int i = 0; i < data.length; i++) {
+            buf.append(' ');
+            buf.append(data[i]);
+        }
+        buf.append(' ');
+        buf.append(toString(IAC));
+        buf.append(' ');
+        buf.append(toString(SE));
+        buf.append(' ');
+        return buf.toString();
     }
-    
+
 }

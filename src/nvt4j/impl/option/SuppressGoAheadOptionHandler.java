@@ -24,36 +24,36 @@ import nvt4j.impl.telnet.TelnetOutputStream;
 public class SuppressGoAheadOptionHandler extends AbstractOptionHandler {
 
     public SuppressGoAheadOptionHandler() {
-	super(TelnetOption.SUPPRESS_GO_AHEAD);
+        super(TelnetOption.SUPPRESS_GO_AHEAD);
     }
 
     public void start(TelnetOutputStream telnetOutputStream) throws IOException {
-	super.start(telnetOutputStream);
-	do_();
+        super.start(telnetOutputStream);
+        do_();
     }
 
     public synchronized void onWILL() throws IOException {
-	if (!on) {
-	    do_();
-	    on = true;
-	    ready = true;
-	}
+        if (!on) {
+            do_();
+            on = true;
+            ready = true;
+        }
     }
 
     public synchronized void onWONT() throws IOException {
-	ready = false;
+        ready = false;
     }
 
     public synchronized void onDO() throws IOException {
-	if (!on) {
-	    will();
-	    on = true;
-	    ready = true;
-	}
+        if (!on) {
+            will();
+            on = true;
+            ready = true;
+        }
     }
 
     public synchronized void onDONT() throws IOException {
-	ready = false;
+        ready = false;
     }
 
 }

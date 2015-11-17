@@ -39,118 +39,118 @@ public class TelnetDecoder {
     private int pos;
 
     public TelnetDecoder(LinkedList commands) {
-	this.commands = commands;
-	state = STATE_DATA;
+        this.commands = commands;
+        state = STATE_DATA;
     }
 
     /*
      * Decodes r bytes of a circular buffer starting from off, in place.
      */
     public int decode(byte[] buf, int off, int r) throws IOException {
-	int p = 0;
-	for (int i = 0; i < r; i++) {
-	    byte b = buf[(off + i) % buf.length];
-	    int c = b & 0xFF;
-	    switch (state) {
-	    case STATE_DATA:
-		switch (c) {
-		case TelnetCommand.IAC:
-		    state = STATE_IAC;
-		    break;
-		default:
-		    buf[(off + p++) % buf.length] = b;
-		    break;
-		}
-		break;
-	    case STATE_IAC:
-		switch (c) {
-		case TelnetCommand.NOP:
-		case TelnetCommand.DM:
-		case TelnetCommand.BRK:
-		case TelnetCommand.IP:
-		case TelnetCommand.AO:
-		case TelnetCommand.AYT:
-		case TelnetCommand.EC:
-		case TelnetCommand.EL:
-		case TelnetCommand.GA:
-		    commands.add(new FunctionCommand(pos + p, c));
-		    state = STATE_DATA;
-		    break;
-		case TelnetCommand.SB:
-		    state = STATE_SB;
-		    break;
-		case TelnetCommand.SE:
-		    //FIXME must get IAC SE in the SB_DATA state
-		    throw new IOException("Protocol violation: SE outside of subnegotiation");
-		case TelnetCommand.WILL:
-		    state = STATE_WILL;
-		    break;
-		case TelnetCommand.WONT:
-		    state = STATE_WONT;
-		    break;
-		case TelnetCommand.DO:
-		    state = STATE_DO;
-		    break;
-		case TelnetCommand.DONT:
-		    state = STATE_DONT;
-		    break;
-		case TelnetCommand.IAC:
-		default:
-		    buf[(off + p++) % buf.length] = b;
-		    state = STATE_DATA;
-		    break;
-		}
-		break;
-	    case STATE_WILL:
-		commands.add(new OptionNegotiationCommand(pos + p, TelnetCommand.WILL, TelnetOption.getOption(c)));
-		state = STATE_DATA;
-		break;
-	    case STATE_WONT:
-		commands.add(new OptionNegotiationCommand(pos + p, TelnetCommand.WONT, TelnetOption.getOption(c)));
-		state = STATE_DATA;
-		break;
-	    case STATE_DO:
-		commands.add(new OptionNegotiationCommand(pos + p, TelnetCommand.DO, TelnetOption.getOption(c)));
-		state = STATE_DATA;
-		break;
-	    case STATE_DONT:
-		commands.add(new OptionNegotiationCommand(pos + p, TelnetCommand.DONT, TelnetOption.getOption(c)));
-		state = STATE_DATA;
-		break;
-	    case STATE_SB:
-		sbOption = c;
-		sbData = new ByteArrayOutputStream();
-		state = STATE_SB_DATA;
-		break;
-	    case STATE_SB_DATA:
-		switch (c) {
-		case TelnetCommand.IAC:
-		    state = STATE_SB_DATA_IAC;
-		    break;
-		default:
-		    sbData.write(c);
-		    break;
-		}
-		break;
-	    case STATE_SB_DATA_IAC:
-		switch (c) {
-		case TelnetCommand.SE:
-		    byte[] data = sbData.toByteArray();
-		    commands.add(new OptionSubnegotiationCommand(pos + p, TelnetOption.getOption(sbOption), data));
-		    state = STATE_DATA;
-		    break;
-		default:
-		    sbData.write(c);
-		    state = STATE_SB_DATA;
-		    break;
-		}
-		break;
-	    default:
-		break;
-	    }
-	}
-	pos = pos + p;
-	return p;
+        int p = 0;
+        for (int i = 0; i < r; i++) {
+            byte b = buf[(off + i) % buf.length];
+            int c = b & 0xFF;
+            switch (state) {
+            case STATE_DATA:
+                switch (c) {
+                case TelnetCommand.IAC:
+                    state = STATE_IAC;
+                    break;
+                default:
+                    buf[(off + p++) % buf.length] = b;
+                    break;
+                }
+                break;
+            case STATE_IAC:
+                switch (c) {
+                case TelnetCommand.NOP:
+                case TelnetCommand.DM:
+                case TelnetCommand.BRK:
+                case TelnetCommand.IP:
+                case TelnetCommand.AO:
+                case TelnetCommand.AYT:
+                case TelnetCommand.EC:
+                case TelnetCommand.EL:
+                case TelnetCommand.GA:
+                    commands.add(new FunctionCommand(pos + p, c));
+                    state = STATE_DATA;
+                    break;
+                case TelnetCommand.SB:
+                    state = STATE_SB;
+                    break;
+                case TelnetCommand.SE:
+                    //FIXME must get IAC SE in the SB_DATA state
+                    throw new IOException("Protocol violation: SE outside of subnegotiation");
+                case TelnetCommand.WILL:
+                    state = STATE_WILL;
+                    break;
+                case TelnetCommand.WONT:
+                    state = STATE_WONT;
+                    break;
+                case TelnetCommand.DO:
+                    state = STATE_DO;
+                    break;
+                case TelnetCommand.DONT:
+                    state = STATE_DONT;
+                    break;
+                case TelnetCommand.IAC:
+                default:
+                    buf[(off + p++) % buf.length] = b;
+                    state = STATE_DATA;
+                    break;
+                }
+                break;
+            case STATE_WILL:
+                commands.add(new OptionNegotiationCommand(pos + p, TelnetCommand.WILL, TelnetOption.getOption(c)));
+                state = STATE_DATA;
+                break;
+            case STATE_WONT:
+                commands.add(new OptionNegotiationCommand(pos + p, TelnetCommand.WONT, TelnetOption.getOption(c)));
+                state = STATE_DATA;
+                break;
+            case STATE_DO:
+                commands.add(new OptionNegotiationCommand(pos + p, TelnetCommand.DO, TelnetOption.getOption(c)));
+                state = STATE_DATA;
+                break;
+            case STATE_DONT:
+                commands.add(new OptionNegotiationCommand(pos + p, TelnetCommand.DONT, TelnetOption.getOption(c)));
+                state = STATE_DATA;
+                break;
+            case STATE_SB:
+                sbOption = c;
+                sbData = new ByteArrayOutputStream();
+                state = STATE_SB_DATA;
+                break;
+            case STATE_SB_DATA:
+                switch (c) {
+                case TelnetCommand.IAC:
+                    state = STATE_SB_DATA_IAC;
+                    break;
+                default:
+                    sbData.write(c);
+                    break;
+                }
+                break;
+            case STATE_SB_DATA_IAC:
+                switch (c) {
+                case TelnetCommand.SE:
+                    byte[] data = sbData.toByteArray();
+                    commands.add(new OptionSubnegotiationCommand(pos + p, TelnetOption.getOption(sbOption), data));
+                    state = STATE_DATA;
+                    break;
+                default:
+                    sbData.write(c);
+                    state = STATE_SB_DATA;
+                    break;
+                }
+                break;
+            default:
+                break;
+            }
+        }
+        pos = pos + p;
+        return p;
     }
 
 }

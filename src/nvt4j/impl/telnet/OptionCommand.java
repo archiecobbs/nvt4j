@@ -25,8 +25,8 @@ public abstract class OptionCommand extends TelnetCommand {
     public TelnetOption getOption() { return option; }
 
     public OptionCommand(int position, TelnetOption option) {
-	super(position);
-	this.option = option;
+        super(position);
+        this.option = option;
     }
 
     public abstract void execute(TelnetOptionHandler optionHandler) throws IOException;

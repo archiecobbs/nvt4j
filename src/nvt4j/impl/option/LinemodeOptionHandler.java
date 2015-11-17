@@ -36,57 +36,57 @@ public class LinemodeOptionHandler extends AbstractOptionHandler {
     private int mask;
 
     public LinemodeOptionHandler() {
-	super(TelnetOption.LINEMODE);
+        super(TelnetOption.LINEMODE);
     }
 
     public void start(TelnetOutputStream telnetOutputStream) throws IOException {
-	super.start(telnetOutputStream);
-	//mask = ~EDIT | ~TRAPSIG | ~SOFT_TAB | ~LIT_ECHO;
-	mask = 0;
-	do_();
+        super.start(telnetOutputStream);
+        //mask = ~EDIT | ~TRAPSIG | ~SOFT_TAB | ~LIT_ECHO;
+        mask = 0;
+        do_();
     }
 
     public synchronized void onWILL() throws IOException {
-	if (!on) {
-	    do_();
-	    on = true;
-	    writeMask();
-	}
+        if (!on) {
+            do_();
+            on = true;
+            writeMask();
+        }
     }
 
     public synchronized void onWONT() throws IOException {
-	ready = false;
+        ready = false;
     }
 
-    public synchronized void onDO() throws IOException { 
-	wont();
+    public synchronized void onDO() throws IOException {
+        wont();
     }
 
     public synchronized void onDONT() throws IOException {
-	//ignore
+        //ignore
     }
 
     private synchronized void writeMask() throws IOException {
-	byte[] buf= new byte[] { (byte) MODE, (byte) this.mask };
-	telnetOutputStream.writeOptionSubnegotiation(option, buf);
-	ready = true;
+        byte[] buf= new byte[] { (byte) MODE, (byte) this.mask };
+        telnetOutputStream.writeOptionSubnegotiation(option, buf);
+        ready = true;
     }
 
     public synchronized void onSubnegotiation(byte[] buf, int off, int len) throws IOException {
-	int subOption = 0xFF & buf[off];
-	switch (subOption) {
-	case MODE:
-	    int mask = 0xFF & buf[off + 1];
-	    if (mask != this.mask) {
-		ready = false;
-	    }
-	    break;
-	case FORWARDMASK:
-	case SLC:
-	default:
-	    writeMask();
-	    break;
-	}
+        int subOption = 0xFF & buf[off];
+        switch (subOption) {
+        case MODE:
+            int mask = 0xFF & buf[off + 1];
+            if (mask != this.mask) {
+                ready = false;
+            }
+            break;
+        case FORWARDMASK:
+        case SLC:
+        default:
+            writeMask();
+            break;
+        }
     }
 
 }

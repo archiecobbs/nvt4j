@@ -25,11 +25,11 @@ public class TelnetCommandException extends IOException {
     public TelnetCommand getTelnetCommand() { return telnetCommand; }
 
     public TelnetCommandException(TelnetCommand telnetCommand) {
-	this.telnetCommand = telnetCommand;
+        this.telnetCommand = telnetCommand;
     }
 
     public String toString() {
-	return telnetCommand.toString();
+        return telnetCommand.toString();
     }
 
 }

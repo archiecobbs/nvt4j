@@ -25,48 +25,48 @@ import nvt4j.impl.telnet.TelnetOutputStream;
 public class NawsOptionHandler extends AbstractOptionHandler {
 
     private Terminal terminal;
-    
+
     public NawsOptionHandler(Terminal terminal) {
-	super(TelnetOption.NAWS);
-	this.terminal = terminal;
+        super(TelnetOption.NAWS);
+        this.terminal = terminal;
     }
 
     public void start(TelnetOutputStream telnetOutputStream) throws IOException {
-	super.start(telnetOutputStream);
-	do_();
+        super.start(telnetOutputStream);
+        do_();
     }
 
     public synchronized void onWILL() throws IOException {
-	if (!on) {
-	    do_();
-	    on = true;
-	}
+        if (!on) {
+            do_();
+            on = true;
+        }
     }
 
     public synchronized void onWONT() throws IOException {
-	ready = false;
+        ready = false;
     }
 
-    public synchronized void onDO() throws IOException { 
-	wont();
+    public synchronized void onDO() throws IOException {
+        wont();
     }
 
     public synchronized void onDONT() throws IOException {
-	//ignore
+        //ignore
     }
 
     public synchronized void onSubnegotiation(byte[] buf, int off, int len) throws IOException {
-	if (len != 4) {
-	    throw new IOException("NAWS subnegotiation must have 4 bytes");
-	}
-	int c1 = 0xFF & buf[off];
-	int c2 = 0xFF & buf[off + 1];
-	int r1 = 0xFF & buf[off + 2];
-	int r2 = 0xFF & buf[off + 3];
-	int columns = (c1 << 8) | c2;
-	int rows = (r1 << 8) | r2;
-	terminal.resize(rows, columns);
-	ready = true;
+        if (len != 4) {
+            throw new IOException("NAWS subnegotiation must have 4 bytes");
+        }
+        int c1 = 0xFF & buf[off];
+        int c2 = 0xFF & buf[off + 1];
+        int r1 = 0xFF & buf[off + 2];
+        int r2 = 0xFF & buf[off + 3];
+        int columns = (c1 << 8) | c2;
+        int rows = (r1 << 8) | r2;
+        terminal.resize(rows, columns);
+        ready = true;
     }
 
 }

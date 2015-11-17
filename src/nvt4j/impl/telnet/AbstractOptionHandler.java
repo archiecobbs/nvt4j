@@ -29,11 +29,11 @@ public abstract class AbstractOptionHandler implements TelnetOptionHandler {
     public boolean isReady() { return ready; }
 
     protected AbstractOptionHandler(TelnetOption option) {
-	this.option = option;
+        this.option = option;
     }
-    
+
     public void start(TelnetOutputStream telnetOutputStream) throws IOException {
-	this.telnetOutputStream = telnetOutputStream;	
+        this.telnetOutputStream = telnetOutputStream;
     }
 
     public abstract void onWILL() throws IOException;
@@ -42,38 +42,38 @@ public abstract class AbstractOptionHandler implements TelnetOptionHandler {
     public abstract void onDONT() throws IOException;
 
     public void onSubnegotiation(byte[] data, int off, int len) throws IOException {
-	if (option.isComplex()) {
-	    throw new RuntimeException("User failed to implement subnegotiation " +
-				       " for option: " +
-				       option);
-	} else {
-	    throw new IOException("Received subnegotiation for simple option: " +
-				  option);
-	}
+        if (option.isComplex()) {
+            throw new RuntimeException("User failed to implement subnegotiation " +
+                                       " for option: " +
+                                       option);
+        } else {
+            throw new IOException("Received subnegotiation for simple option: " +
+                                  option);
+        }
     }
 
     protected void will() throws IOException {
-	telnetOutputStream.writeWILL(option);
+        telnetOutputStream.writeWILL(option);
     }
 
     protected void wont() throws IOException {
-	telnetOutputStream.writeWONT(option);
+        telnetOutputStream.writeWONT(option);
     }
 
     protected void do_() throws IOException {
-	telnetOutputStream.writeDO(option);
+        telnetOutputStream.writeDO(option);
     }
 
     protected void dont() throws IOException {
-	telnetOutputStream.writeDONT(option);
+        telnetOutputStream.writeDONT(option);
     }
 
     protected void sub(byte[] buf) throws IOException {
-	sub(buf, 0, buf.length);
+        sub(buf, 0, buf.length);
     }
 
     protected void sub(byte[] buf, int off, int len) throws IOException {
-	telnetOutputStream.writeOptionSubnegotiation(option, buf, off, len);
+        telnetOutputStream.writeOptionSubnegotiation(option, buf, off, len);
     }
 
 }

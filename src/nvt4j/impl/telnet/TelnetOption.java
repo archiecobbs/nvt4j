@@ -19,37 +19,37 @@ package nvt4j.impl.telnet;
 public class TelnetOption {
 
     public static TelnetOption ECHO =
-	new TelnetOption(false, 1, "ECHO");
+        new TelnetOption(false, 1, "ECHO");
 
     public static TelnetOption LINEMODE =
-	new TelnetOption(true, 34, "LINEMODE");
+        new TelnetOption(true, 34, "LINEMODE");
 
     public static TelnetOption NAWS =
-	new TelnetOption(true, 31, "NAWS");
+        new TelnetOption(true, 31, "NAWS");
 
     public static TelnetOption SUPPRESS_GO_AHEAD =
-	new TelnetOption(false, 3, "SUPPRESS-GO-AHEAD");
+        new TelnetOption(false, 3, "SUPPRESS-GO-AHEAD");
 
     public static TelnetOption TERMINAL_TYPE =
-	new TelnetOption(true, 24, "TERMINAL-TYPE");
+        new TelnetOption(true, 24, "TERMINAL-TYPE");
 
     private static TelnetOption[] options;
 
     static {
-	options = new TelnetOption[256];
-	options[ECHO.getCode()] = ECHO;
-	options[LINEMODE.getCode()] = LINEMODE;
-	options[NAWS.getCode()] = NAWS;
-	options[SUPPRESS_GO_AHEAD.getCode()] = SUPPRESS_GO_AHEAD;
-	options[TERMINAL_TYPE.getCode()] = TERMINAL_TYPE;
+        options = new TelnetOption[256];
+        options[ECHO.getCode()] = ECHO;
+        options[LINEMODE.getCode()] = LINEMODE;
+        options[NAWS.getCode()] = NAWS;
+        options[SUPPRESS_GO_AHEAD.getCode()] = SUPPRESS_GO_AHEAD;
+        options[TERMINAL_TYPE.getCode()] = TERMINAL_TYPE;
     }
 
     public static TelnetOption getOption(int code) {
-	TelnetOption option = options[code];
-	if (option == null) {
-	    throw new RuntimeException("No option for code: " + code);
-	}
-	return option;
+        TelnetOption option = options[code];
+        if (option == null) {
+            throw new RuntimeException("No option for code: " + code);
+        }
+        return option;
     }
 
     private boolean complex;
@@ -59,17 +59,17 @@ public class TelnetOption {
     public boolean isComplex() { return complex; }
     public int getCode() { return code; }
     public String getName() { return name; }
-    
+
     private TelnetOption(boolean complex,
-			 int code,
-			 String name) {
-	this.complex = complex;
-	this.code = code;
-	this.name = name;
+                         int code,
+                         String name) {
+        this.complex = complex;
+        this.code = code;
+        this.name = name;
     }
 
     public String toString() {
-	return name;
+        return name;
     }
 
 }

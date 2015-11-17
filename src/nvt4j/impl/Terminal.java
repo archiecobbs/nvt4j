@@ -38,22 +38,22 @@ public class Terminal implements nvt4j.Terminal {
 
     private class OptionStartThread extends Thread {
 
-	private IOException exception;
+        private IOException exception;
 
-	public IOException getException() { return exception; }
+        public IOException getException() { return exception; }
 
-	public void run() {
-	    try {
-		for (int i = 0; i < optionHandlers.length; i++) {
-		    TelnetOptionHandler optionHandler = optionHandlers[i];
-		    if (optionHandler != null) {
-			optionHandler.start(out);
-		    }
-		}
-	    } catch (IOException exception) {
-		this.exception = exception;
-	    }
-	}
+        public void run() {
+            try {
+                for (int i = 0; i < optionHandlers.length; i++) {
+                    TelnetOptionHandler optionHandler = optionHandlers[i];
+                    if (optionHandler != null) {
+                        optionHandler.start(out);
+                    }
+                }
+            } catch (IOException exception) {
+                this.exception = exception;
+            }
+        }
 
     }
 
@@ -70,7 +70,7 @@ public class Terminal implements nvt4j.Terminal {
     private TelnetOptionHandler[] optionHandlers;
     private int handlerQuorum;
     private int readyCount;
-    
+
     /*
      * Terminal dimensions.
      */
@@ -81,183 +81,183 @@ public class Terminal implements nvt4j.Terminal {
     public int getColumns() { return columns; }
 
     public void resize(int rows, int columns) {
-	this.rows = rows;
-	this.columns = columns;
+        this.rows = rows;
+        this.columns = columns;
     }
 
     public void setCursor(boolean on) throws IOException {
-	put(on ? CURSOR_ON : CURSOR_OFF);
+        put(on ? CURSOR_ON : CURSOR_OFF);
     }
 
     public void clear() throws IOException {
-	put(CLEAR_SCREEN);
+        put(CLEAR_SCREEN);
     }
 
     public Terminal(Socket socket) throws IOException {
-	this(socket.getInputStream(), socket.getOutputStream());
-	this.socket = socket;
+        this(socket.getInputStream(), socket.getOutputStream());
+        this.socket = socket;
     }
 
     public Terminal(InputStream in, OutputStream out) throws IOException {
-	this.in = new TelnetInputStream(in);
-	this.out = new TelnetOutputStream(out);
-	optionHandlers = new TelnetOptionHandler[256];
-	TelnetOptionHandler[] tmp = new TelnetOptionHandler[] {
-	    new SuppressGoAheadOptionHandler(),
-	    new EchoOptionHandler(),
-	    new LinemodeOptionHandler(),
-	    new NawsOptionHandler(this)
-	};
-	handlerQuorum = tmp.length;
-	for (int i = 0; i < tmp.length; i++) {
-	    optionHandlers[tmp[i].getOption().getCode()] = tmp[i];
-	}
-	init();
+        this.in = new TelnetInputStream(in);
+        this.out = new TelnetOutputStream(out);
+        optionHandlers = new TelnetOptionHandler[256];
+        TelnetOptionHandler[] tmp = new TelnetOptionHandler[] {
+            new SuppressGoAheadOptionHandler(),
+            new EchoOptionHandler(),
+            new LinemodeOptionHandler(),
+            new NawsOptionHandler(this)
+        };
+        handlerQuorum = tmp.length;
+        for (int i = 0; i < tmp.length; i++) {
+            optionHandlers[tmp[i].getOption().getCode()] = tmp[i];
+        }
+        init();
     }
 
     private void init() throws IOException {
-	OptionStartThread optionStarter = new OptionStartThread();
-	optionStarter.start();
-	while (readyCount < handlerQuorum) {
-	    try {
-		IOException exception = optionStarter.getException();
-		if (exception != null) {
-		    throw exception;
-		}
-		in.read();
-	    } catch (TelnetCommandException e) {
-		handleCommandException(e);
-	    }
-	}
-	clear();
-	put(AUTO_WRAP_OFF);
-	setCursor(false);
-	move(1, 1);
-	flush();
+        OptionStartThread optionStarter = new OptionStartThread();
+        optionStarter.start();
+        while (readyCount < handlerQuorum) {
+            try {
+                IOException exception = optionStarter.getException();
+                if (exception != null) {
+                    throw exception;
+                }
+                in.read();
+            } catch (TelnetCommandException e) {
+                handleCommandException(e);
+            }
+        }
+        clear();
+        put(AUTO_WRAP_OFF);
+        setCursor(false);
+        move(1, 1);
+        flush();
     }
 
     private void handleCommandException(TelnetCommandException e) throws IOException {
-	TelnetCommand telnetCommand = e.getTelnetCommand();
-	if (telnetCommand instanceof OptionCommand) {
-	    OptionCommand optionCommand = (OptionCommand) telnetCommand;
-	    TelnetOption option = ((OptionCommand) telnetCommand).getOption();
-	    TelnetOptionHandler optionHandler =
-		optionHandlers[optionCommand.getOption().getCode()];
-	    boolean wasReady = optionHandler.isReady();
-	    optionCommand.execute(optionHandler);
-	    boolean isReady = optionHandler.isReady();
-	    if (!wasReady && isReady) {
-		++readyCount;
-	    } else if (wasReady && !isReady) {
-		throw new IOException("Client disabled option: " + option);
-	    }
-	} else {
-	    throw new IOException("Unsupported telnet option: " + telnetCommand);
-	}
+        TelnetCommand telnetCommand = e.getTelnetCommand();
+        if (telnetCommand instanceof OptionCommand) {
+            OptionCommand optionCommand = (OptionCommand) telnetCommand;
+            TelnetOption option = ((OptionCommand) telnetCommand).getOption();
+            TelnetOptionHandler optionHandler =
+                optionHandlers[optionCommand.getOption().getCode()];
+            boolean wasReady = optionHandler.isReady();
+            optionCommand.execute(optionHandler);
+            boolean isReady = optionHandler.isReady();
+            if (!wasReady && isReady) {
+                ++readyCount;
+            } else if (wasReady && !isReady) {
+                throw new IOException("Client disabled option: " + option);
+            }
+        } else {
+            throw new IOException("Unsupported telnet option: " + telnetCommand);
+        }
     }
 
     public int get() throws IOException {
-	int r;
-	while (true) {
-	    try {
-		r = in.read();
-		break;
-	    } catch (TelnetCommandException e) {
-		handleCommandException(e);
-	    }
-	}
-	return r;
+        int r;
+        while (true) {
+            try {
+                r = in.read();
+                break;
+            } catch (TelnetCommandException e) {
+                handleCommandException(e);
+            }
+        }
+        return r;
     }
 
     public int get(byte[] buf) throws IOException {
-	return get(buf, 0, buf.length);
+        return get(buf, 0, buf.length);
     }
 
     public int get(byte[] buf, int off, int len) throws IOException {
-	int r;
-	while (true) {
-	    try {
-		r = in.read(buf, off, len);
-		break;
-	    } catch (TelnetCommandException e) {
-		handleCommandException(e);
-	    }
-	}
-	return r;
+        int r;
+        while (true) {
+            try {
+                r = in.read(buf, off, len);
+                break;
+            } catch (TelnetCommandException e) {
+                handleCommandException(e);
+            }
+        }
+        return r;
     }
 
     public void put(byte[] buf, int off, int len) throws IOException {
-	out.write(buf, off, len);
+        out.write(buf, off, len);
     }
 
     public void put(byte[] buf) throws IOException {
-	put(buf, 0, buf.length);
+        put(buf, 0, buf.length);
     }
 
     public void put(String s) throws IOException {
-	put(s.getBytes());
+        put(s.getBytes());
     }
 
     public void put(int c) throws IOException {
-	put((byte) c);
+        put((byte) c);
     }
 
     public void put(char c) throws IOException {
-	put((byte) c);
+        put((byte) c);
     }
 
     public void put(byte c) throws IOException {
-	out.write(c);
+        out.write(c);
     }
 
     public void put(int row, int column, byte[] buf, int off, int len) throws IOException {
-	move(row, column);
-	out.write(buf, off, len);
+        move(row, column);
+        out.write(buf, off, len);
     }
 
     public void put(int row, int column, byte[] buf) throws IOException {
-	move(row, column);
-	put(buf, 0, buf.length);
+        move(row, column);
+        put(buf, 0, buf.length);
     }
 
     public void put(int row, int column, String s) throws IOException {
-	move(row, column);
-	put(s.getBytes());
+        move(row, column);
+        put(s.getBytes());
     }
 
     public void put(int row, int column, int c) throws IOException {
-	move(row, column);
-	put((byte) c);
+        move(row, column);
+        put((byte) c);
     }
 
     public void put(int row, int column, char c) throws IOException {
-	move(row, column);
-	put((byte) c);
+        move(row, column);
+        put((byte) c);
     }
 
     public void put(int row, int column, byte c) throws IOException {
-	move(row, column);
-	out.write(c);
+        move(row, column);
+        out.write(c);
     }
 
     public void flush() throws IOException {
-	out.flush();
+        out.flush();
     }
 
     public void move(int row, int column) throws IOException {
-	put(MOVE);
-	put(String.valueOf(column));
-	put(';');
-	put(String.valueOf(row));
-	put('H');
+        put(MOVE);
+        put(String.valueOf(column));
+        put(';');
+        put(String.valueOf(row));
+        put('H');
     }
 
     public void close() throws IOException {
-	if (socket != null) {
-	    try { socket.close(); } catch (IOException e) {}
-	}
-	try { in.close(); } catch (IOException e) {}
-	try { out.close(); } catch (IOException e) {}
+        if (socket != null) {
+            try { socket.close(); } catch (IOException e) {}
+        }
+        try { in.close(); } catch (IOException e) {}
+        try { out.close(); } catch (IOException e) {}
     }
 
 }

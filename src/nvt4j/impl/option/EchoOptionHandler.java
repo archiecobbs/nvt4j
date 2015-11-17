@@ -24,29 +24,29 @@ import nvt4j.impl.telnet.TelnetOutputStream;
 public class EchoOptionHandler extends AbstractOptionHandler {
 
     public EchoOptionHandler() {
-	super(TelnetOption.ECHO);
+        super(TelnetOption.ECHO);
     }
 
     public void start(TelnetOutputStream telnetOutputStream) throws IOException {
-	super.start(telnetOutputStream);
-	will();
+        super.start(telnetOutputStream);
+        will();
     }
 
     public synchronized void onWILL() throws IOException {
-	dont();
+        dont();
     }
 
     public synchronized void onWONT() throws IOException {
-	//do nothing
+        //do nothing
     }
 
     public synchronized void onDO() throws IOException {
-	on = true;
-	ready = true;
+        on = true;
+        ready = true;
     }
 
     public synchronized void onDONT() throws IOException {
-	ready = false;
+        ready = false;
     }
 
 }

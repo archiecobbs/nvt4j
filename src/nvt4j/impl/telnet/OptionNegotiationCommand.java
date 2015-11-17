@@ -25,46 +25,46 @@ public class OptionNegotiationCommand extends OptionCommand {
     public int getType() { return type; }
 
     public OptionNegotiationCommand(int position, int type, TelnetOption option) {
-	super(position, option);
-	switch (type) {
-	case WILL:
-	case WONT:
-	case DO:
-	case DONT:
-	    this.type = type;
-	    break;
-	default:
-	    throw new IllegalArgumentException("type " + toString(type) + " not valid");
-	}
+        super(position, option);
+        switch (type) {
+        case WILL:
+        case WONT:
+        case DO:
+        case DONT:
+            this.type = type;
+            break;
+        default:
+            throw new IllegalArgumentException("type " + toString(type) + " not valid");
+        }
     }
 
     public void execute(TelnetOptionHandler optionHandler) throws IOException {
-	switch (type) {
-	case WILL:
-	    optionHandler.onWILL();
-	    break;
-	case WONT:
-	    optionHandler.onWONT();
-	    break;
-	case DO:
-	    optionHandler.onDO();
-	    break;
-	case DONT:
-	    optionHandler.onDONT();
-	    break;
-	default:
-	    throw new RuntimeException("bug: unknown type: " + type);
-	}
+        switch (type) {
+        case WILL:
+            optionHandler.onWILL();
+            break;
+        case WONT:
+            optionHandler.onWONT();
+            break;
+        case DO:
+            optionHandler.onDO();
+            break;
+        case DONT:
+            optionHandler.onDONT();
+            break;
+        default:
+            throw new RuntimeException("bug: unknown type: " + type);
+        }
     }
 
     public String toString() {
-	StringBuffer buf = new StringBuffer();
-	buf.append(toString(IAC));
-	buf.append(' ');
-	buf.append(toString(type));
-	buf.append(' ');
-	buf.append(option);
-	return buf.toString();
+        StringBuffer buf = new StringBuffer();
+        buf.append(toString(IAC));
+        buf.append(' ');
+        buf.append(toString(type));
+        buf.append(' ');
+        buf.append(option);
+        return buf.toString();
     }
 
 }

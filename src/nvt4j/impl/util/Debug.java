@@ -23,47 +23,47 @@ import java.io.BufferedReader;
 import java.io.CharArrayReader;
 
 public class Debug {
-    
+
     private static void print(String s) {
-	System.err.println(s);
+        System.err.println(s);
     }
-    
+
     public static void trace() {
-	String trace[] = getTrace(3);
-	print("Trace: " + trace[0] + " " + trace[1]);
+        String trace[] = getTrace(3);
+        print("Trace: " + trace[0] + " " + trace[1]);
     }
 
     public static void trace(String s) {
-	String trace[] = getTrace(3);
-	print("Trace: " + trace[0] + " " + trace[1] + " " + s);
+        String trace[] = getTrace(3);
+        print("Trace: " + trace[0] + " " + trace[1] + " " + s);
     }
 
     public static String[] getTrace(int level) {
-	String[] trace = new String[2];
-	try {
-	    //print stack trace to a char array
-	    Throwable t = new Throwable();
-	    CharArrayWriter cw = new CharArrayWriter();
-	    PrintWriter w = new PrintWriter(cw);
-	    t.printStackTrace(w);
-	    w.close();
-	    //now parse the stack trace
-	    CharArrayReader cr = new CharArrayReader(cw.toCharArray());
-	    BufferedReader r = new BufferedReader(cr);
-	    String line = null;
-	    while ((line = r.readLine()) != null && level-- > 0);
-	    r.close();
-	    //line looks like " at Test.main(Test.java:6)"
-	    int ap = line.indexOf("at ");
-	    int lp = line.indexOf('(');
-	    int rp = line.indexOf(')');
-	    int cp = line.indexOf(':');
-	    trace[0] = line.substring(ap + 3, lp);
-	    trace[1] = line.substring(cp + 1, rp);
-	} catch (Exception e) {
-	    //ignore (method doesn't work with JIT on)
-	}
-	return trace;
+        String[] trace = new String[2];
+        try {
+            //print stack trace to a char array
+            Throwable t = new Throwable();
+            CharArrayWriter cw = new CharArrayWriter();
+            PrintWriter w = new PrintWriter(cw);
+            t.printStackTrace(w);
+            w.close();
+            //now parse the stack trace
+            CharArrayReader cr = new CharArrayReader(cw.toCharArray());
+            BufferedReader r = new BufferedReader(cr);
+            String line = null;
+            while ((line = r.readLine()) != null && level-- > 0);
+            r.close();
+            //line looks like " at Test.main(Test.java:6)"
+            int ap = line.indexOf("at ");
+            int lp = line.indexOf('(');
+            int rp = line.indexOf(')');
+            int cp = line.indexOf(':');
+            trace[0] = line.substring(ap + 3, lp);
+            trace[1] = line.substring(cp + 1, rp);
+        } catch (Exception e) {
+            //ignore (method doesn't work with JIT on)
+        }
+        return trace;
     }
 
 }

@@ -21,34 +21,34 @@ import java.io.IOException;
 public class DefaultOptionHandler extends AbstractOptionHandler {
 
     public DefaultOptionHandler(TelnetOption option) {
-	super(option);
+        super(option);
     }
 
     public void start(TelnetOutputStream telnetOutputStream) throws IOException {
-	super.start(telnetOutputStream);
+        super.start(telnetOutputStream);
     }
 
     public synchronized void onWILL() throws IOException {
-	dont();
+        dont();
     }
 
     public synchronized void onWONT() throws IOException {
-	//do nothing
+        //do nothing
     }
 
     public synchronized void onDO() throws IOException {
-	wont();
+        wont();
     }
 
     public synchronized void onDONT() throws IOException {
-	//do nothing
-	on = false;
+        //do nothing
+        on = false;
     }
 
     public synchronized void onSubnegotiation(byte[] data, int off, int len)
-	throws IOException {
-	dont();
-	on = false;
+        throws IOException {
+        dont();
+        on = false;
     }
 
 }

@@ -29,88 +29,88 @@ public class TelnetEncoder {
     private int last;
 
     public TelnetEncoder(OutputStream out) {
-	buf = new byte[512];
-	this.out = out;
+        buf = new byte[512];
+        this.out = out;
     }
 
     public void encode(byte[] buf, int off, int len) throws IOException {
-	int p = 0;
-	for (int i = off; i < off + len; i++) {
-	    int c = 0xFF & buf[i];
-	    if (last == CR) {
-		if (c != LF) {
-		    //CR -> CR 0
-		    this.buf[p++] = (byte) 0;
-		}
-	    } else {
-		if (c == LF) {
-		    //LF -> CR LF
-		    this.buf[p++] = (byte) CR;
-		} else if (c == TelnetCommand.IAC) {
-		    //IAC -> IAC IAC
-		    this.buf[p++] = (byte) TelnetCommand.IAC;
-		}
-	    }
-	    this.buf[p++] = (byte) c;
-	    last = c;
-	    if (p > this.buf.length - 2) {
-		out.write(this.buf, 0, p);
-		p = 0;
-	    }
-	}
-	if (p > 0) {
-	    out.write(this.buf, 0, p);
-	}
+        int p = 0;
+        for (int i = off; i < off + len; i++) {
+            int c = 0xFF & buf[i];
+            if (last == CR) {
+                if (c != LF) {
+                    //CR -> CR 0
+                    this.buf[p++] = (byte) 0;
+                }
+            } else {
+                if (c == LF) {
+                    //LF -> CR LF
+                    this.buf[p++] = (byte) CR;
+                } else if (c == TelnetCommand.IAC) {
+                    //IAC -> IAC IAC
+                    this.buf[p++] = (byte) TelnetCommand.IAC;
+                }
+            }
+            this.buf[p++] = (byte) c;
+            last = c;
+            if (p > this.buf.length - 2) {
+                out.write(this.buf, 0, p);
+                p = 0;
+            }
+        }
+        if (p > 0) {
+            out.write(this.buf, 0, p);
+        }
     }
 
     public void encodeFunction(int function) throws IOException {
-	switch (function) {
-	case TelnetCommand.NOP:
-	case TelnetCommand.DM:
-	case TelnetCommand.BRK:
-	case TelnetCommand.IP:
-	case TelnetCommand.AO:
-	case TelnetCommand.AYT:
-	case TelnetCommand.EC:
-	case TelnetCommand.EL:
-	case TelnetCommand.GA:
-	    break;
-	default:
-	    throw new IllegalArgumentException("Invalid function: " +
-					       TelnetCommand.toString(function));
-	}
-	out.write(TelnetCommand.IAC);
-	out.write(function);
-	out.flush();
+        switch (function) {
+        case TelnetCommand.NOP:
+        case TelnetCommand.DM:
+        case TelnetCommand.BRK:
+        case TelnetCommand.IP:
+        case TelnetCommand.AO:
+        case TelnetCommand.AYT:
+        case TelnetCommand.EC:
+        case TelnetCommand.EL:
+        case TelnetCommand.GA:
+            break;
+        default:
+            throw new IllegalArgumentException("Invalid function: " +
+                                               TelnetCommand.toString(function));
+        }
+        out.write(TelnetCommand.IAC);
+        out.write(function);
+        out.flush();
     }
 
     public void encodeOptionNegotiation(int type, TelnetOption option) throws IOException {
-	switch (type) {
-	case TelnetCommand.WILL:
-	case TelnetCommand.WONT:
-	case TelnetCommand.DO:
-	case TelnetCommand.DONT:
-	    break;
-	default:
-	    throw new IllegalArgumentException("type " +
-					       TelnetCommand.toString(type) +
-					       " not valid");
-	}
-	out.write(TelnetCommand.IAC);
-	out.write(type);
-	out.write(option.getCode());
-	out.flush();
+        switch (type) {
+        case TelnetCommand.WILL:
+        case TelnetCommand.WONT:
+        case TelnetCommand.DO:
+        case TelnetCommand.DONT:
+            break;
+        default:
+            throw new IllegalArgumentException("type " +
+                                               TelnetCommand.toString(type) +
+                                               " not valid");
+        }
+        out.write(TelnetCommand.IAC);
+        out.write(type);
+        out.write(option.getCode());
+        out.flush();
     }
 
     public void encodeOptionSubnegotiation(TelnetOption option, byte[] buf, int off, int len)
-	throws IOException {
-	out.write(TelnetCommand.IAC);
-	out.write(TelnetCommand.SB);
-	out.write(option.getCode());
-	out.write(buf, off, len);
-	out.write(TelnetCommand.IAC);
-	out.write(TelnetCommand.SE);
-	out.flush();
+        throws IOException {
+        out.write(TelnetCommand.IAC);
+        out.write(TelnetCommand.SB);
+        out.write(option.getCode());
+        out.write(buf, off, len);
+        out.write(TelnetCommand.IAC);
+        out.write(TelnetCommand.SE);
+        out.flush();
     }
 
 }

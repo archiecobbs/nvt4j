@@ -28,9 +28,9 @@ application you need to listen for a tcp connection and then wrap a Terminal
 object around it:
 
 ```
-	ServerSocket serverSocket = new ServerSocket(8000);
-	Socket socket = serverSocket.accept();
-	Terminal terminal = new nvt4j.impl.Terminal(socket);
+ServerSocket serverSocket = new ServerSocket(8000);
+Socket socket = serverSocket.accept();
+Terminal terminal = new nvt4j.impl.Terminal(socket);
 ```
 
 For example, to run the sample class Example.java from an xterm session, you can

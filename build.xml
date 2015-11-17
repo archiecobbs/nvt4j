@@ -4,6 +4,8 @@
         <property name="src.dir" value="src"/>
         <property name="build.dir" value="build"/>
         <property name="api.dir" value="api"/>
+        <property name="java.source.version" value="1.7"/>
+        <property name="java.target.version" value="1.7"/>
 
         <path id="classpath">
                 <pathelement location="${build.dir}"/>
@@ -16,15 +18,24 @@
         </target>
 
         <target name="build" depends="init">
-                <javac srcdir="${src.dir}" destdir="${build.dir}">
-                        <classpath refid="classpath"/>
-                        <compilerarg value="-Xlint:-unchecked"/>
+                <javac includeantruntime="no"
+                       compiler="modern"
+                       deprecation="true"
+                       source="${java.source.version}"
+                       target="${java.target.version}"
+                       srcdir="${src.dir}"
+                       destdir="${build.dir}"
+                       debug="true">
+                    <classpath refid="classpath"/>
+                    <compilerarg value="-Xlint:all"/>
                 </javac>
         </target>
 
         <target name="api" depends="init">
-                <javadoc sourcepath="${src.dir}" destdir="${api.dir}">
-                        <package name="nvt4j"/>
+                <javadoc sourcepath="${src.dir}" destdir="${api.dir}" use="true"
+                  source="${java.source.version}" breakiterator="yes" windowtitle="NVT4J" doctitle="NVT4J" failonerror="true">
+                    <package name="nvt4j"/>
+                    <arg value="-notimestamp"/>
                 </javadoc>
         </target>
 

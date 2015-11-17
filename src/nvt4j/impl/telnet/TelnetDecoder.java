@@ -35,10 +35,10 @@ public class TelnetDecoder {
     private int state;
     private ByteArrayOutputStream sbData;
     private int sbOption;
-    private LinkedList commands;
+    private LinkedList<TelnetCommand> commands;
     private int pos;
 
-    public TelnetDecoder(LinkedList commands) {
+    public TelnetDecoder(LinkedList<TelnetCommand> commands) {
         this.commands = commands;
         state = STATE_DATA;
     }

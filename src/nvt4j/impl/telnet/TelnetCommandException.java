@@ -18,6 +18,7 @@ package nvt4j.impl.telnet;
 
 import java.io.IOException;
 
+@SuppressWarnings("serial")
 public class TelnetCommandException extends IOException {
 
     private TelnetCommand telnetCommand;

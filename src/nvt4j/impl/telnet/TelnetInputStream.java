@@ -39,7 +39,7 @@ public class TelnetInputStream extends InputStream {
     private byte[] byteBuf;
     private int off;
     private int len;
-    private LinkedList commands;
+    private LinkedList<TelnetCommand> commands;
     private TelnetDecoder decoder;
     private int pos;
 
@@ -51,7 +51,7 @@ public class TelnetInputStream extends InputStream {
         this.in = in;
         buf = new byte[size];
         byteBuf = new byte[1];
-        commands = new LinkedList();
+        commands = new LinkedList<TelnetCommand>();
         decoder = new TelnetDecoder(commands);
     }
 
@@ -87,7 +87,7 @@ public class TelnetInputStream extends InputStream {
                 fill();
             }
             if (commands.size() > 0) {
-                TelnetCommand telnetCommand = (TelnetCommand) commands.get(0);
+                TelnetCommand telnetCommand = commands.get(0);
                 int nextPos = telnetCommand.getPosition();
                 if (pos < nextPos) {
                     if (pos + len >= nextPos) {

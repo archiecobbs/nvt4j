@@ -1,4 +1,4 @@
-<project name="nvt4j" default="build" basedir=".">
+<project name="nvt4j" default="jar" basedir=".">
 
         <!-- Determine version -->
         <exec outputproperty="library.version" executable="git" logError="true" failonerror="true">
@@ -9,9 +9,11 @@
         <echo message=""/>
 
         <property name="jar.file" value="nvt4j-${library.version}.jar"/>
+        <property name="javadoc.file" value="nvt4j-javadoc-${library.version}.zip"/>
+        <property name="sources.file" value="nvt4j-sources-${library.version}.zip"/>
         <property name="src.dir" value="src"/>
         <property name="build.dir" value="build"/>
-        <property name="api.dir" value="api"/>
+        <property name="javadoc.dir" value="api"/>
         <property name="java.source.version" value="1.7"/>
         <property name="java.target.version" value="1.7"/>
 
@@ -19,13 +21,15 @@
                 <pathelement location="${build.dir}"/>
         </path>
 
-        <target name="init">
-                <tstamp/>
-                <mkdir dir="${build.dir}"/>
-                <mkdir dir="${api.dir}"/>
+        <target name="clean">
+                <delete dir="${build.dir}"/>
+                <delete dir="." includes="nvt4j-*.jar"/>
+                <delete dir="." includes="nvt4j-javadoc-*.zip"/>
+                <delete dir="." includes="nvt4j-sources-*.zip"/>
         </target>
 
-        <target name="build" depends="init">
+        <target name="javac">
+                <mkdir dir="${build.dir}"/>
                 <javac includeantruntime="no"
                        compiler="modern"
                        deprecation="true"
@@ -35,32 +39,34 @@
                        destdir="${build.dir}"
                        debug="true">
                     <classpath refid="classpath"/>
+                    <exclude name="Example.java"/>
                     <compilerarg value="-Xlint:all"/>
                 </javac>
         </target>
 
-        <target name="api" depends="init">
-                <javadoc sourcepath="${src.dir}" destdir="${api.dir}" use="true"
+        <target name="javadoc" depends="javac">
+                <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}" use="true"
                   source="${java.source.version}" breakiterator="yes" failonerror="true"
                   windowtitle="NVT4J Release ${library.version}" doctitle="NVT4J Release ${library.version}">
                     <package name="nvt4j"/>
+                    <packageset dir="src" defaultexcludes="yes">
+                        <include name="**/*"/>
+                        <exclude name="Example.java"/>
+                    </packageset>
                     <arg value="-notimestamp"/>
                 </javadoc>
+                <zip destfile="${javadoc.file}" basedir="${javadoc.dir}"/>
         </target>
 
-        <target name="release" depends="init">
-                <delete file="${jar.file}"/>
-                <delete dir="${api.dir}"/>
-                <antcall target="clean"/>
-                <antcall target="build"/>
+        <target name="jar" depends="javac">
                 <jar destfile="${jar.file}" basedir="${build.dir}"/>
-                <antcall target="api"/>
-                <antcall target="clean"/>
         </target>
 
-        <target name="clean">
-                <delete dir="${build.dir}"/>
+        <target name="sources">
+                <zip destfile="${sources.file}" basedir="${src.dir}"/>
         </target>
+
+        <target name="release" depends="clean, jar, javadoc, sources"/>
 
 </project>
 

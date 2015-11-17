@@ -1,0 +1,9 @@
+
+Version 1.0a1 Released April 28, 2008
+
+    First alpha release. This code is quite limited but it already provides the basic
+    functions needed to drive a terminal emulator for Java, namely putting the terminal
+    driver in raw mode, turning off the cursor and client-side echo, and detecting the
+    size of the terminal emulator window.
+
+    This code has been tested only with xterm.

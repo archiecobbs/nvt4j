@@ -14,19 +14,21 @@
  *  limitations under the License.
  */
 
-package nvt4j.impl.telnet;
+package org.dellroad.nvt4j.impl.telnet;
 
 import java.io.IOException;
 
-public interface TelnetOptionHandler {
+public abstract class OptionCommand extends TelnetCommand {
 
-    public TelnetOption getOption();
-    public boolean isReady();
-    public void start(TelnetOutputStream telnetOutputStream) throws IOException;
-    public void onWILL() throws IOException;
-    public void onWONT() throws IOException;
-    public void onDO() throws IOException;
-    public void onDONT() throws IOException;
-    public void onSubnegotiation(byte[] data, int off, int len) throws IOException;
+    protected TelnetOption option;
+
+    public TelnetOption getOption() { return option; }
+
+    public OptionCommand(int position, TelnetOption option) {
+        super(position);
+        this.option = option;
+    }
+
+    public abstract void execute(TelnetOptionHandler optionHandler) throws IOException;
 
 }

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package nvt4j.impl.telnet;
+package org.dellroad.nvt4j.impl.telnet;
 
 public class FunctionCommand extends TelnetCommand {
 

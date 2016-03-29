@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package nvt4j.impl.util;
+package org.dellroad.nvt4j.impl.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;

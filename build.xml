@@ -49,7 +49,7 @@
                 <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}" use="true"
                   source="${java.source.version}" breakiterator="yes" failonerror="true"
                   windowtitle="NVT4J Release ${library.version}" doctitle="NVT4J Release ${library.version}">
-                    <package name="nvt4j"/>
+                    <package name="org.dellroad.nvt4j"/>
                     <packageset dir="src" defaultexcludes="yes">
                         <include name="**/*"/>
                         <exclude name="Example.java"/>

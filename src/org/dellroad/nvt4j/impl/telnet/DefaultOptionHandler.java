@@ -14,46 +14,41 @@
  *  limitations under the License.
  */
 
-package nvt4j.impl.option;
+package org.dellroad.nvt4j.impl.telnet;
 
 import java.io.IOException;
-import nvt4j.impl.telnet.AbstractOptionHandler;
-import nvt4j.impl.telnet.TelnetOption;
-import nvt4j.impl.telnet.TelnetOutputStream;
 
-public class SuppressGoAheadOptionHandler extends AbstractOptionHandler {
+public class DefaultOptionHandler extends AbstractOptionHandler {
 
-    public SuppressGoAheadOptionHandler() {
-        super(TelnetOption.SUPPRESS_GO_AHEAD);
+    public DefaultOptionHandler(TelnetOption option) {
+        super(option);
     }
 
     public void start(TelnetOutputStream telnetOutputStream) throws IOException {
         super.start(telnetOutputStream);
-        do_();
     }
 
     public synchronized void onWILL() throws IOException {
-        if (!on) {
-            do_();
-            on = true;
-            ready = true;
-        }
+        dont();
     }
 
     public synchronized void onWONT() throws IOException {
-        ready = false;
+        //do nothing
     }
 
     public synchronized void onDO() throws IOException {
-        if (!on) {
-            will();
-            on = true;
-            ready = true;
-        }
+        wont();
     }
 
     public synchronized void onDONT() throws IOException {
-        ready = false;
+        //do nothing
+        on = false;
+    }
+
+    public synchronized void onSubnegotiation(byte[] data, int off, int len)
+        throws IOException {
+        dont();
+        on = false;
     }
 
 }

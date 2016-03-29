@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package nvt4j;
+package org.dellroad.nvt4j;
 
 import java.io.IOException;
 

@@ -14,12 +14,12 @@
  *  limitations under the License.
  */
 
-package nvt4j.impl.option;
+package org.dellroad.nvt4j.impl.option;
 
 import java.io.IOException;
-import nvt4j.impl.telnet.AbstractOptionHandler;
-import nvt4j.impl.telnet.TelnetOption;
-import nvt4j.impl.telnet.TelnetOutputStream;
+import org.dellroad.nvt4j.impl.telnet.AbstractOptionHandler;
+import org.dellroad.nvt4j.impl.telnet.TelnetOption;
+import org.dellroad.nvt4j.impl.telnet.TelnetOutputStream;
 
 public class LinemodeOptionHandler extends AbstractOptionHandler {
 

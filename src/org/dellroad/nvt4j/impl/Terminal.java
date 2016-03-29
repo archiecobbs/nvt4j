@@ -14,28 +14,28 @@
  *  limitations under the License.
  */
 
-package nvt4j.impl;
+package org.dellroad.nvt4j.impl;
 
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import nvt4j.impl.telnet.DefaultOptionHandler;
-import nvt4j.impl.telnet.FunctionCommand;
-import nvt4j.impl.telnet.OptionCommand;
-import nvt4j.impl.telnet.TelnetCommand;
-import nvt4j.impl.telnet.TelnetCommandException;
-import nvt4j.impl.telnet.TelnetInputStream;
-import nvt4j.impl.telnet.TelnetOption;
-import nvt4j.impl.telnet.TelnetOptionHandler;
-import nvt4j.impl.telnet.TelnetOutputStream;
-import nvt4j.impl.option.EchoOptionHandler;
-import nvt4j.impl.option.LinemodeOptionHandler;
-import nvt4j.impl.option.NawsOptionHandler;
-import nvt4j.impl.option.SuppressGoAheadOptionHandler;
+import org.dellroad.nvt4j.impl.telnet.DefaultOptionHandler;
+import org.dellroad.nvt4j.impl.telnet.FunctionCommand;
+import org.dellroad.nvt4j.impl.telnet.OptionCommand;
+import org.dellroad.nvt4j.impl.telnet.TelnetCommand;
+import org.dellroad.nvt4j.impl.telnet.TelnetCommandException;
+import org.dellroad.nvt4j.impl.telnet.TelnetInputStream;
+import org.dellroad.nvt4j.impl.telnet.TelnetOption;
+import org.dellroad.nvt4j.impl.telnet.TelnetOptionHandler;
+import org.dellroad.nvt4j.impl.telnet.TelnetOutputStream;
+import org.dellroad.nvt4j.impl.option.EchoOptionHandler;
+import org.dellroad.nvt4j.impl.option.LinemodeOptionHandler;
+import org.dellroad.nvt4j.impl.option.NawsOptionHandler;
+import org.dellroad.nvt4j.impl.option.SuppressGoAheadOptionHandler;
 
-public class Terminal implements nvt4j.Terminal {
+public class Terminal implements org.dellroad.nvt4j.Terminal {
 
     private class OptionStartThread extends Thread {
 

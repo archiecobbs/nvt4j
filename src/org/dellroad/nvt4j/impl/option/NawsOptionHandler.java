@@ -14,26 +14,37 @@
  *  limitations under the License.
  */
 
-package nvt4j.impl.telnet;
+package org.dellroad.nvt4j.impl.option;
 
 import java.io.IOException;
+import org.dellroad.nvt4j.impl.Terminal;
+import org.dellroad.nvt4j.impl.telnet.AbstractOptionHandler;
+import org.dellroad.nvt4j.impl.telnet.TelnetOption;
+import org.dellroad.nvt4j.impl.telnet.TelnetOutputStream;
 
-public class DefaultOptionHandler extends AbstractOptionHandler {
+public class NawsOptionHandler extends AbstractOptionHandler {
 
-    public DefaultOptionHandler(TelnetOption option) {
-        super(option);
+    private Terminal terminal;
+
+    public NawsOptionHandler(Terminal terminal) {
+        super(TelnetOption.NAWS);
+        this.terminal = terminal;
     }
 
     public void start(TelnetOutputStream telnetOutputStream) throws IOException {
         super.start(telnetOutputStream);
+        do_();
     }
 
     public synchronized void onWILL() throws IOException {
-        dont();
+        if (!on) {
+            do_();
+            on = true;
+        }
     }
 
     public synchronized void onWONT() throws IOException {
-        //do nothing
+        ready = false;
     }
 
     public synchronized void onDO() throws IOException {
@@ -41,14 +52,21 @@ public class DefaultOptionHandler extends AbstractOptionHandler {
     }
 
     public synchronized void onDONT() throws IOException {
-        //do nothing
-        on = false;
+        //ignore
     }
 
-    public synchronized void onSubnegotiation(byte[] data, int off, int len)
-        throws IOException {
-        dont();
-        on = false;
+    public synchronized void onSubnegotiation(byte[] buf, int off, int len) throws IOException {
+        if (len != 4) {
+            throw new IOException("NAWS subnegotiation must have 4 bytes");
+        }
+        int c1 = 0xFF & buf[off];
+        int c2 = 0xFF & buf[off + 1];
+        int r1 = 0xFF & buf[off + 2];
+        int r2 = 0xFF & buf[off + 3];
+        int columns = (c1 << 8) | c2;
+        int rows = (r1 << 8) | r2;
+        terminal.resize(rows, columns);
+        ready = true;
     }
 
 }

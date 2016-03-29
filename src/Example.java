@@ -1,6 +1,6 @@
 
 import java.net.*;
-import nvt4j.Terminal;
+import org.dellroad.nvt4j.Terminal;
 
 public class Example {
 

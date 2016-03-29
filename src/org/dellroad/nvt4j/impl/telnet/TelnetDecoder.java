@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package nvt4j.impl.telnet;
+package org.dellroad.nvt4j.impl.telnet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

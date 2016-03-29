@@ -14,21 +14,17 @@
  *  limitations under the License.
  */
 
-package nvt4j.impl.option;
+package org.dellroad.nvt4j.impl.option;
 
 import java.io.IOException;
-import nvt4j.impl.Terminal;
-import nvt4j.impl.telnet.AbstractOptionHandler;
-import nvt4j.impl.telnet.TelnetOption;
-import nvt4j.impl.telnet.TelnetOutputStream;
+import org.dellroad.nvt4j.impl.telnet.AbstractOptionHandler;
+import org.dellroad.nvt4j.impl.telnet.TelnetOption;
+import org.dellroad.nvt4j.impl.telnet.TelnetOutputStream;
 
-public class NawsOptionHandler extends AbstractOptionHandler {
+public class SuppressGoAheadOptionHandler extends AbstractOptionHandler {
 
-    private Terminal terminal;
-
-    public NawsOptionHandler(Terminal terminal) {
-        super(TelnetOption.NAWS);
-        this.terminal = terminal;
+    public SuppressGoAheadOptionHandler() {
+        super(TelnetOption.SUPPRESS_GO_AHEAD);
     }
 
     public void start(TelnetOutputStream telnetOutputStream) throws IOException {
@@ -40,6 +36,7 @@ public class NawsOptionHandler extends AbstractOptionHandler {
         if (!on) {
             do_();
             on = true;
+            ready = true;
         }
     }
 
@@ -48,25 +45,15 @@ public class NawsOptionHandler extends AbstractOptionHandler {
     }
 
     public synchronized void onDO() throws IOException {
-        wont();
+        if (!on) {
+            will();
+            on = true;
+            ready = true;
+        }
     }
 
     public synchronized void onDONT() throws IOException {
-        //ignore
-    }
-
-    public synchronized void onSubnegotiation(byte[] buf, int off, int len) throws IOException {
-        if (len != 4) {
-            throw new IOException("NAWS subnegotiation must have 4 bytes");
-        }
-        int c1 = 0xFF & buf[off];
-        int c2 = 0xFF & buf[off + 1];
-        int r1 = 0xFF & buf[off + 2];
-        int r2 = 0xFF & buf[off + 3];
-        int columns = (c1 << 8) | c2;
-        int rows = (r1 << 8) | r2;
-        terminal.resize(rows, columns);
-        ready = true;
+        ready = false;
     }
 
 }

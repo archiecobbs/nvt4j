@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import org.dellroad.nvt4j.Terminal;
 import org.dellroad.nvt4j.impl.telnet.DefaultOptionHandler;
 import org.dellroad.nvt4j.impl.telnet.FunctionCommand;
 import org.dellroad.nvt4j.impl.telnet.OptionCommand;
@@ -35,7 +36,7 @@ import org.dellroad.nvt4j.impl.option.LinemodeOptionHandler;
 import org.dellroad.nvt4j.impl.option.NawsOptionHandler;
 import org.dellroad.nvt4j.impl.option.SuppressGoAheadOptionHandler;
 
-public class Terminal implements org.dellroad.nvt4j.Terminal {
+public class TerminalImpl implements Terminal {
 
     private class OptionStartThread extends Thread {
 
@@ -94,12 +95,12 @@ public class Terminal implements org.dellroad.nvt4j.Terminal {
         put(CLEAR_SCREEN);
     }
 
-    public Terminal(Socket socket) throws IOException {
+    public TerminalImpl(Socket socket) throws IOException {
         this(socket.getInputStream(), socket.getOutputStream());
         this.socket = socket;
     }
 
-    public Terminal(InputStream in, OutputStream out) throws IOException {
+    public TerminalImpl(InputStream in, OutputStream out) throws IOException {
         this.in = new TelnetInputStream(in);
         this.out = new TelnetOutputStream(out);
         optionHandlers = new TelnetOptionHandler[256];

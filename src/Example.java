@@ -1,6 +1,7 @@
 
 import java.net.*;
 import org.dellroad.nvt4j.Terminal;
+import org.dellroad.nvt4j.impl.TerminalImpl;
 
 public class Example {
 
@@ -17,7 +18,7 @@ public class Example {
 
         ServerSocket serverSocket = new ServerSocket(8000);
         Socket socket = serverSocket.accept();
-        Terminal terminal = new nvt4j.impl.Terminal(socket);
+        Terminal terminal = new TerminalImpl(socket);
 
         terminal.put(10, 10, "Use keys 6,7,8,9 to move the text");
         Thread.sleep(2000);

@@ -14,15 +14,14 @@ and given a new home here on Github on 17-Nov-2015.
 Usage
 -----
 
-The API consists of the interface `nvt4j.Terminal`. The implementation of this
-class is called `nvt4j.impl.Terminal`. To allow the user to connect to the
-application you need to listen for a tcp connection and then wrap a Terminal
-object around it:
+The API consists of the interface `Terminal`. The implementation of this class is
+called `TerminalImpl`. To allow the user to connect to the application you need
+to listen for a tcp connection and then wrap a `TerminalImpl` object around it:
 
 ```
 ServerSocket serverSocket = new ServerSocket(8000);
 Socket socket = serverSocket.accept();
-Terminal terminal = new nvt4j.impl.Terminal(socket);
+Terminal terminal = new TerminalImpl(socket);
 ```
 
 For example, to run the sample class Example.java from an xterm session, you can
@@ -57,5 +56,6 @@ License
 See the [LICENSE](https://github.com/archiecobbs/nvt4j/blob/master/LICENSE) file.
 
 Copyright 2006 Guglielmo Lichtner
+
 Copyright 2015 Archie L. Cobbs
 

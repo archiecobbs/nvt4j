@@ -17,16 +17,16 @@
 package org.dellroad.nvt4j.impl.option;
 
 import java.io.IOException;
-import org.dellroad.nvt4j.impl.Terminal;
+import org.dellroad.nvt4j.impl.TerminalImpl;
 import org.dellroad.nvt4j.impl.telnet.AbstractOptionHandler;
 import org.dellroad.nvt4j.impl.telnet.TelnetOption;
 import org.dellroad.nvt4j.impl.telnet.TelnetOutputStream;
 
 public class NawsOptionHandler extends AbstractOptionHandler {
 
-    private Terminal terminal;
+    private TerminalImpl terminal;
 
-    public NawsOptionHandler(Terminal terminal) {
+    public NawsOptionHandler(TerminalImpl terminal) {
         super(TelnetOption.NAWS);
         this.terminal = terminal;
     }

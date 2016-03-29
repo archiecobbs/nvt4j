@@ -1,4 +1,8 @@
 
+Version Next
+
+    - Repackage classes under org.dellroad.nvt4j.*
+
 Version 1.1.0 Released November 17, 2015
 
     - Fixed infinite loop if EOF is encountered at startup (issue #1)

@@ -1,7 +1,8 @@
 
-Version Next
+Version 1.2.0 Released April 5, 2016
 
     - Repackage classes under org.dellroad.nvt4j.*
+    - Maven'ify project and publish to Maven central
 
 Version 1.1.0 Released November 17, 2015
 

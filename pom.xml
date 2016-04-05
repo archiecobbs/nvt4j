@@ -6,10 +6,34 @@
   <packaging>jar</packaging>
   <version>1.2.0</version>
   <name>nvt4j</name>
+  <description>The Network Virtual Terminal for Java (NVT4J) is a library which can drive a terminal emulator connected to the application through a telnet session.</description>
   <url>https://github.com/archiecobbs/nvt4j</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/archiecobbs/nvt4j/issues</url>
+  </issueManagement>
+  <scm>
+    <url>https://github.com/archiecobbs/nvt4j/</url>
+    <connection>scm:git:git://github.com/archiecobbs/nvt4j.git</connection>
+    <developerConnection>scm:git:git://github.com/archiecobbs/nvt4j.git</developerConnection>
+  </scm>
+  <developers>
+    <developer>
+      <id>archie</id>
+      <name>Archie Cobbs</name>
+      <email>archie.cobbs@gmail.com</email>
+    </developer>
+  </developers>
   <properties>
-      <compiler.source>1.7</compiler.source>
-      <compiler.target>1.7</compiler.target>
+    <compiler.source>1.7</compiler.source>
+    <compiler.target>1.7</compiler.target>
   </properties>
   <dependencies>
     <dependency>

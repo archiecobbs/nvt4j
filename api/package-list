@@ -1,5 +1,5 @@
-nvt4j
-nvt4j.impl
-nvt4j.impl.option
-nvt4j.impl.telnet
-nvt4j.impl.util
+org.dellroad.nvt4j
+org.dellroad.nvt4j.impl
+org.dellroad.nvt4j.impl.option
+org.dellroad.nvt4j.impl.telnet
+org.dellroad.nvt4j.impl.util
